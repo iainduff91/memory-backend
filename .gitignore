@@ -1,0 +1,6 @@
+#no IntelliJ module files
+*.iml
+#ignore all files in .idea/ directory
+.idea/
+#ignore all output generated in target/
+target/
