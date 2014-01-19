@@ -7,42 +7,33 @@ import org.scalatest.{Matchers, FlatSpec}
  *
  * @author Iain Duff
  */
-class BoardTest extends FlatSpec with Matchers {
-
-  def fixture = new {
-    val cardsList = Array(new Card(1), new Card(2))
-    val board = new Board(cardsList)
-  }
+class BoardTest extends ProjectTest {
 
   "duplicateCards" must "create a list containing 2 of each given card" in {
-    val f = fixture
-    val expectedNumberOfCards = 2 * f.cardsList.length
-    val result = f.board.duplicateCards(f.cardsList)
+    val expectedNumberOfCards = 2 * cardsList.length
+    val result = board.duplicateCards(cardsList)
     assertResult(expectedNumberOfCards)(result.size)
-    assertResult(f.cardsList(0).Id)(result(0).Id)
-    assertResult(f.cardsList(0).Id)(result(1).Id)
-    assertResult(f.cardsList(1).Id)(result(2).Id)
-    assertResult(f.cardsList(1).Id)(result(3).Id)
+    assertResult(cardsList(0).Id)(result(0).Id)
+    assertResult(cardsList(0).Id)(result(1).Id)
+    assertResult(cardsList(1).Id)(result(2).Id)
+    assertResult(cardsList(1).Id)(result(3).Id)
   }
 
   "layCards" must "create a grid with 4 columns" in {
-    val f = fixture
-    val cardGrid = f.board.layCards(f.cardsList)
+    val cardGrid = board.layCards(cardsList)
     assertResult(4)(cardGrid.length)
   }
 
   "layCards" must "create a grid with 2 of each card" in {
-    val f = fixture
-    val expectedNumberOfCards = 2 * f.cardsList.length
-    val cardGrid = f.board.layCards(f.cardsList)
+    val expectedNumberOfCards = 2 * cardsList.length
+    val cardGrid = board.layCards(cardsList)
 
     val actualNumberOfCards = cardGrid(0).length + cardGrid(1).length + cardGrid(2).length + cardGrid(3).length
     assertResult(expectedNumberOfCards)(actualNumberOfCards)
   }
 
   "layCards" must "create a grid with cards in a random order" in {
-    val f = fixture
-    val laidBoard = f.board.layCards(f.cardsList)
+    val laidBoard = board.layCards(cardsList)
     val concatenatedResult = "" + laidBoard(0)(0).Id + laidBoard(1)(0).Id + laidBoard(2)(0).Id +
           laidBoard(3)(0).Id
 
