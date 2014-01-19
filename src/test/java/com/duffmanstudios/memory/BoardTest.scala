@@ -3,7 +3,9 @@ package com.duffmanstudios.memory
 import org.scalatest.{Matchers, FlatSpec}
 
 /**
- * Created by Student on 28/12/13.
+ * Contains unit tests for testing the functionality in Board.
+ *
+ * @author Iain Duff
  */
 class BoardTest extends FlatSpec with Matchers {
 
@@ -39,7 +41,14 @@ class BoardTest extends FlatSpec with Matchers {
   }
 
   "layCards" must "create a grid with cards in a random order" in {
-    fail("to be completed")
+    val f = fixture
+    val laidBoard = f.board.layCards(f.cardsList)
+    val concatenatedResult = "" + laidBoard(0)(0).Id + laidBoard(1)(0).Id + laidBoard(2)(0).Id +
+          laidBoard(3)(0).Id
+
+    assert(!concatenatedResult.equals("1122"))
   }
+
+
   
 }

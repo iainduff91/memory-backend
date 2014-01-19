@@ -3,7 +3,9 @@ package com.duffmanstudios.memory
 import scala.util.Random
 
 /**
- * Created by Student on 28/12/13.
+ * Represents the board on which the game cards are laid.
+ *
+ * @author Iain Duff
  */
 class Board(cards: Array[Card]) {
 
@@ -14,11 +16,16 @@ class Board(cards: Array[Card]) {
 
     val random = new Random()
     val numCards = cardPairs.size
+    var usedIndexes = List[Int]()
+    var index = 0
 
     for(i <- 0 until numCards) {
-      val index = random.nextInt(cardPairs.size)
+      do {
+        index = random.nextInt(cardPairs.size)
+      } while (usedIndexes.contains(index))
+
       cardGrid(i % 4) = cardGrid(i % 4) ++ List(cardPairs(index))
-      cardPairs = cardPairs.diff(List(index))
+      usedIndexes = usedIndexes ++ List(index)
     }
     cardGrid
   }
