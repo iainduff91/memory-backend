@@ -10,9 +10,9 @@ class PlayerTest extends ProjectTest {
   "selectCards" must "return the cards in the locations selected on the board" in {
     val boardGrid = game.board.boardGrid
     val player = new Player(1, game)
-    val cardOneXY = (0, 0)
-    val cardTwoXY = (3, 0)
-    val selectedCards = player.selectCards(cardOneXY, cardTwoXY)
+    val cardOne = 1
+    val cardTwo = 4
+    val selectedCards = player.selectCards(cardOne, cardTwo)
 
     assert(selectedCards(0).equals(boardGrid(0)(0)))
     assert(selectedCards(1).equals(boardGrid(3)(0)))

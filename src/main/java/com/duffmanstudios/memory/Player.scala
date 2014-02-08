@@ -7,7 +7,9 @@ package com.duffmanstudios.memory
  */
 class Player(number: Int, game: Game) {
 
-  def selectCards(cardOneXY: (Int, Int), cardTwoXY: (Int, Int)) = {
+  def selectCards(cardOne: Int, cardTwo: Int) = {
+    val cardOneXY = CardToBoardTranslator.translateCardNumberIntoBoardGridLocation(cardOne)
+    val cardTwoXY = CardToBoardTranslator.translateCardNumberIntoBoardGridLocation(cardTwo)
     List(game.board.boardGrid(cardOneXY._1)(cardOneXY._2)) ++ List(game.board.boardGrid(cardTwoXY._1)(cardTwoXY._2))
   }
 
