@@ -9,8 +9,6 @@ import org.scalatest.{FlatSpec, Matchers}
  */
 class ProjectTest extends FlatSpec with Matchers {
 
-  val cardsList = Array(new Card(1), new Card(1),
-    new Card(2), new Card(2))
+  val cardsList = Array(new Card(1), new Card(1), new Card(2), new Card(2), new Card(3))
   val game = new Game(cardsList)
-  val board = new Board(cardsList)
 }
