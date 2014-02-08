@@ -10,72 +10,44 @@ import org.scalatest.{Matchers, FlatSpec}
 class CardTest extends ProjectTest {
 
   "Two cards with matching IDs" must "be identified as having matching IDs" in {
-    val cardOne = new Card(1, defaultFileName)
-    val cardTwo = new Card(1, defaultFileName)
+    val cardOne = new Card(1)
+    val cardTwo = new Card(1)
 
     cardOne.Id should equal (cardTwo.Id)
   }
 
   "Two cards with non-matching IDs" must "be identified as having non-matching IDs" in {
-    val cardOne = new Card(1, defaultFileName)
-    val cardTwo = new Card(2, defaultFileName)
+    val cardOne = new Card(1)
+    val cardTwo = new Card(2)
 
     cardOne.Id should not equal cardTwo.Id
   }
 
-  "Two cards with matching filenames" must "be identified as having matching filenames" in {
-    val cardOne = new Card(1, "file_1.png")
-    val cardTwo = new Card(2, "file_1.png")
-
-    cardOne.fileName should equal (cardTwo.fileName)
-  }
-
-  "Two cards with non-matching filenames" must "be identified as having non-matching filenames" in {
-    val cardOne = new Card(1, "file_1.png")
-    val cardTwo = new Card(1, "file_2.png")
-
-    cardOne.fileName should not equal cardTwo.fileName
-  }
-
   "equals" must "return true if both reference the same object" in {
-    val cardOne = new Card(1, defaultFileName)
+    val cardOne = new Card(1)
     val cardTwo = cardOne
 
     assert(cardOne.equals(cardTwo))
   }
 
   "equals" must "return false if object to compare to is NOT a Card" in {
-    val cardOne = new Card(1, defaultFileName)
+    val cardOne = new Card(1)
     val notACard = new String("")
 
     assertResult(false)(cardOne.equals(notACard))
   }
 
-  "equals" must "return true if cards have the SAME ID and SAME FILENAME" in {
-    val cardOne = new Card(1, defaultFileName)
-    val cardTwo = new Card(1, defaultFileName)
+  "equals" must "return true if cards have the SAME ID" in {
+    val cardOne = new Card(1)
+    val cardTwo = new Card(1)
 
     assert(cardOne.equals(cardTwo))
   }
 
-  "equals" must "return false if cards have DIFFERENT IDs but SAME FILENAME" in {
-    val cardOne = new Card(1, defaultFileName)
-    val cardTwo = new Card(2, defaultFileName)
+  "equals" must "return false if cards have DIFFERENT IDs" in {
+    val cardOne = new Card(1)
+    val cardTwo = new Card(2)
 
     assertResult(false)(cardOne.equals(cardTwo))
-  }
-
-  "equals" must "return false if cards have SAME ID but DIFFERENT FILENAMES" in {
-    val cardOne = new Card(1, "example.png")
-    val cardTwo = new Card(1, "different_name.png")
-
-    assert(!cardOne.equals(cardTwo))
-  }
-
-  "equals" must "return false if cards have DIFFERENT IDs and DIFFERENT FILENAMES" in {
-    val cardOne = new Card(1, "file_1.png")
-    val cardTwo = new Card(2, "file_2.png")
-
-    assert(!cardOne.equals(cardTwo))
   }
 }

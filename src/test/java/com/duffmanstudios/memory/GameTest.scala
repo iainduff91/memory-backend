@@ -1,6 +1,5 @@
 package com.duffmanstudios.memory
 
-import org.scalatest._
 import scala.collection.mutable.Stack
 
 /**
@@ -18,7 +17,7 @@ class GameTest extends ProjectTest {
     stack.pop() should be (1)
   }
 
-  it should "throw NoSuchElementException if an empty statck is popped" in {
+  it should "throw NoSuchElementException if an empty stack is popped" in {
     val emptyStack = new Stack[Int]
     a [NoSuchElementException] should be thrownBy {
       emptyStack.pop();
@@ -26,17 +25,17 @@ class GameTest extends ProjectTest {
   }
 
   "isMatch" must "return true if both compared cards have matching IDs" in {
-    val cardOne = new Card(1, defaultFileName)
-    val cardTwo = new Card(1, defaultFileName)
+    val cardOne = new Card(1)
+    val cardTwo = new Card(1)
 
-    game.isMatch(cardOne, cardTwo) should be (true)
+    assert(game.isMatch(cardOne, cardTwo))
   }
 
   "isMatch" must "return false if compared cards do NOT have matching IDs" in {
-    val cardOne = new Card(1, defaultFileName)
-    val cardTwo = new Card(2, defaultFileName)
+    val cardOne = new Card(1)
+    val cardTwo = new Card(2)
 
-    game.isMatch(cardOne, cardTwo) should be (false)
+    assert(!game.isMatch(cardOne, cardTwo))
   }
 
   "gameOver" must "be true if no cards are left in the game" in {

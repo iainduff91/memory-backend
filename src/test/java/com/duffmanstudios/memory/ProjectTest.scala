@@ -9,10 +9,8 @@ import org.scalatest.{FlatSpec, Matchers}
  */
 class ProjectTest extends FlatSpec with Matchers {
 
-  val defaultFileName = "example.png"
-  val cardsList = Array(new Card(1, defaultFileName), new Card(1, defaultFileName),
-    new Card(2, defaultFileName), new Card(2, defaultFileName))
+  val cardsList = Array(new Card(1), new Card(1),
+    new Card(2), new Card(2))
   val game = new Game(cardsList)
   val board = new Board(cardsList)
-
 }

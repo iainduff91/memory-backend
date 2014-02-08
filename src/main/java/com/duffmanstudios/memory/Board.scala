@@ -34,7 +34,7 @@ class Board(cards: Array[Card]) {
   def duplicateCards(cards: Array[Card]): List[Card] = {
     var cardPairs: List[Card] = List()
     for (card <- cards) {
-      val duplicate = new Card(card.Id, card.fileName)
+      val duplicate = new Card(card.Id)
       cardPairs = cardPairs ++ List(card, duplicate)
     }
     cardPairs
