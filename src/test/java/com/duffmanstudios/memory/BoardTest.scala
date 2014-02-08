@@ -34,10 +34,12 @@ class BoardTest extends ProjectTest {
 
   "layCards" must "create a grid with cards in a random order" in {
     val laidBoard = game.board.boardGrid
-    val concatenatedResult = "" + laidBoard(0)(0).Id + laidBoard(1)(0).Id + laidBoard(2)(0).Id +
-          laidBoard(3)(0).Id
+    val concatenatedResult = "" +
+      laidBoard(0)(0).Id + laidBoard(1)(0).Id + laidBoard(2)(0).Id + laidBoard(3)(0).Id +
+      laidBoard(0)(1).Id + laidBoard(1)(1).Id + laidBoard(2)(1).Id + laidBoard(3)(1).Id +
+      laidBoard(0)(2).Id + laidBoard(1)(2).Id
 
-    assert(!concatenatedResult.equals("1122"))
+    assert(!concatenatedResult.equals("1122334455"))
   }
 
 
