@@ -9,6 +9,7 @@ import scala.util.Random
  */
 class Board(cards: Array[Card]) {
 
+  val boardGrid = layCards(cards)
 
   def layCards(cards: Array[Card]): Array[List[Card]] = {
     var cardPairs = duplicateCards(cards)

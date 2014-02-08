@@ -20,20 +20,20 @@ class BoardTest extends ProjectTest {
   }
 
   "layCards" must "create a grid with 4 columns" in {
-    val cardGrid = board.layCards(cardsList)
+    val cardGrid = board.boardGrid
     assertResult(4)(cardGrid.length)
   }
 
   "layCards" must "create a grid with 2 of each card" in {
     val expectedNumberOfCards = 2 * cardsList.length
-    val cardGrid = board.layCards(cardsList)
+    val cardGrid = board.boardGrid
 
     val actualNumberOfCards = cardGrid(0).length + cardGrid(1).length + cardGrid(2).length + cardGrid(3).length
     assertResult(expectedNumberOfCards)(actualNumberOfCards)
   }
 
   "layCards" must "create a grid with cards in a random order" in {
-    val laidBoard = board.layCards(cardsList)
+    val laidBoard = board.boardGrid
     val concatenatedResult = "" + laidBoard(0)(0).Id + laidBoard(1)(0).Id + laidBoard(2)(0).Id +
           laidBoard(3)(0).Id
 
