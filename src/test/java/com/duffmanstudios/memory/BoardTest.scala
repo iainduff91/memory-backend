@@ -42,6 +42,40 @@ class BoardTest extends ProjectTest {
     assert(!concatenatedResult.equals("1122334455"))
   }
 
+  "getCardPair" must "return the cards at the selected locations" in {
+    val cards = Array(new Card(1), new Card(2), new Card(3))
+    val board = new Board(cards)
+
+    var selectedCards: Array[Card] = board.getCardPair((0, 0), (1, 0))
+    assert(selectedCards(0).equals(board.boardGrid(0)(0).get) && selectedCards(1).equals(board.boardGrid(1)(0).get))
+
+    selectedCards = board.getCardPair((2, 0), (3, 0))
+    assert(selectedCards(0).equals(board.boardGrid(2)(0).get) && selectedCards(1).equals(board.boardGrid(3)(0).get))
+
+    selectedCards = board.getCardPair((0, 1), (1, 1))
+    assert(selectedCards(0).equals(board.boardGrid(0)(1).get) && selectedCards(1).equals(board.boardGrid(1)(1).get))
+  }
+
+  it should "throw NoCardException when a valid location holding no card is selected" in {
+    val cards = Array(new Card(1), new Card(2))
+    val board = new Board(cards)
+    val removedLocationOne = (0, 0)
+    val removedLocationTwo = (1, 0)
+    board.removeCards(removedLocationOne, removedLocationTwo)
+
+    intercept[NoCardException] {
+      board.getCardPair(removedLocationTwo, (2, 0))
+    }
+
+    intercept[NoCardException] {
+      board.getCardPair((3, 0), removedLocationOne)
+    }
+
+    intercept[NoCardException] {
+      board.getCardPair(removedLocationOne, removedLocationTwo)
+    }
+  }
+
   "removeCards" must "remove a card from a location on the board" in {
     val gameCards = Array(new Card(1), new Card(2), new Card(3))
     val board = new Board(gameCards)

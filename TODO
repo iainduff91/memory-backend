@@ -1,5 +1,12 @@
 Board
 ======
 
-getCardPair when one or more of the values selected = None
-getCard Pair when one or more of the values selected <0 || > length
+Player
+======
+
+Add to score if get a matching pair
+
+Game
+====
+
+Delete isMatch

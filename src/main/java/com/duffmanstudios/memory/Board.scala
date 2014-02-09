@@ -41,6 +41,14 @@ class Board(cards: Array[Card]) {
     cardPairs
   }
 
+  def getCardPair(cardOneXY: (Int, Int), cardTwoXY: (Int, Int)) = {
+    val selectedCards: Array[Card] = new Array[Card](2)
+    val errorMessage = "No card here!"
+    selectedCards(0) = boardGrid(cardOneXY._1)(cardOneXY._2).getOrElse(throw new NoCardException(errorMessage))
+    selectedCards(1) = boardGrid(cardTwoXY._1)(cardTwoXY._2).getOrElse(throw new NoCardException(errorMessage))
+    selectedCards
+  }
+
   def removeCards(cardOneXY: (Int, Int), cardTwoXY: (Int, Int)) {
     boardGrid(cardOneXY._1)(cardOneXY._2) = None
     boardGrid(cardTwoXY._1)(cardTwoXY._2) = None
