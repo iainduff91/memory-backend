@@ -12,7 +12,7 @@ class CardToBoardTranslatorTest extends ProjectTest {
     val second = 2
     val third = 3
     val fourth = 4
-    val last = game.getNumCards
+    val last = game.board.getNumCards
 
     val translatedFirst = CardToBoardTranslator.translateCardNumberIntoBoardGridLocation(first)
     val translatedSecond = CardToBoardTranslator.translateCardNumberIntoBoardGridLocation(second)

@@ -12,11 +12,6 @@ class Game(cards: Array[Card]) {
 
   def isMatch(cardOne: Card, cardTwo: Card) = cardOne.Id == cardTwo.Id
 
-  /**
-   * @return Double the number of cards passed into Game, because the number of cards is duplicated when the board is set up.
-   */
-  def getNumCards = cards.length * 2
-
   def gameOver = cards.isEmpty
 
   def makeBoard = new Board(cards)
