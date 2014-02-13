@@ -40,7 +40,7 @@ class GameTest extends ProjectTest {
 
   "gameOver" must "be true if no cards are left in the game" in {
     val noCards = new Array[Card](0)
-    val game = new Game(noCards)
+    val game = new Game(noCards, players)
 
     assert(game.gameOver)
   }

@@ -7,46 +7,14 @@ package com.duffmanstudios.memory
  */
 class PlayerTest extends ProjectTest {
 
-  "selectCards" must "return the cards in the locations selected on the board" in {
-    val boardGrid = game.board.boardGrid
-    val player = new Player(1, game)
-    val cardOne = 1
-    val cardTwo = game.board.getNumCards
-    val selectedCards = player.selectCards(cardOne, cardTwo)
+  "selectCards" must "return the cards selected by the player" in {
+    val player = new Player (1)
+    val selectedCardOne = 1
+    val selectedCardTwo = 4
 
-    assert(selectedCards(0).equals(boardGrid(0)(0)))
-    assert(selectedCards(1).equals(boardGrid(1)(2)))
-  }
+    val selectedCards = player.selectCards(selectedCardOne, selectedCardTwo)
 
-  "selectCards" must "throw an IllegalArgumentException when one or more of the card numbers is either below zero" in {
-    val player = new Player(1, game)
-    val illegalNumber = 0
-    intercept[IllegalArgumentException] {
-      player.selectCards(illegalNumber, 2)
-    }
-
-    intercept[IllegalArgumentException] {
-      player.selectCards(1, illegalNumber)
-    }
-
-    intercept[IllegalArgumentException] {
-      player.selectCards(illegalNumber, illegalNumber)
-    }
-  }
-
-  "selectCards" must "throw an IllegalArgumentException when one or more of the card numbers is greater than the total number of cards" in {
-    val player = new Player(1, game)
-    val illegalNumber = game.board.getNumCards + 1
-    intercept[IllegalArgumentException] {
-      player.selectCards(illegalNumber, 1)
-    }
-
-    intercept[IllegalArgumentException] {
-      player.selectCards(1, illegalNumber)
-    }
-
-    intercept[IllegalArgumentException] {
-      player.selectCards(illegalNumber, illegalNumber)
-    }
+    selectedCards(0) should equal (1)
+    selectedCards(1) should equal (4)
   }
 }

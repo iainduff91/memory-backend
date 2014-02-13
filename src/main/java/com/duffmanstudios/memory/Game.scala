@@ -6,7 +6,7 @@ package com.duffmanstudios.memory
  *
  * @author Iain Duff
  */
-class Game(cards: Array[Card]) {
+class Game(cards: Array[Card], players: Array[Player]) {
 
   val board = makeBoard
 

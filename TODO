@@ -9,4 +9,10 @@ Add to score if get a matching pair
 Game
 ====
 
+Take turn logic
+    - select Cards              DONE
+    - check card entry          DONE
+    - check for match
+    - add scores, remove card if necessary
+    - switch player
 Delete isMatch
