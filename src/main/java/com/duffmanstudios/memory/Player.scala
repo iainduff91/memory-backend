@@ -7,11 +7,18 @@ package com.duffmanstudios.memory
  */
 class Player(number: Int) {
 
+  var score = 0
+
   def selectCards(cardOne: Int, cardTwo: Int) = {
     val selectedCards = new Array[Int](2)
     selectedCards(0) = cardOne
     selectedCards(1) = cardTwo
     selectedCards
+  }
+
+  def increaseScore = {
+    score += 1
+    score
   }
 
 }
