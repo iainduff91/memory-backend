@@ -24,6 +24,11 @@ class GameTest extends ProjectTest {
     }
   }
 
+  "makeBoard" must "create a new Board" in {
+    val result = game.makeBoard
+    assert(result.isInstanceOf[Board])
+  }
+
   "isMatch" must "return true if both compared cards have matching IDs" in {
     val cardOne = new Card(1)
     val cardTwo = new Card(1)
@@ -38,6 +43,14 @@ class GameTest extends ProjectTest {
     assert(!game.isMatch(cardOne, cardTwo))
   }
 
+  "switchPlayer" must "change the current player to the previous current player's opponent" in {
+    game.currentPlayer.number should equal (1)
+    game.switchPlayer
+    game.currentPlayer.number should equal (2)
+    game.switchPlayer
+    game.currentPlayer.number should equal (1)
+  }
+
   "gameOver" must "be true if no cards are left in the game" in {
     val noCards = new Array[Card](0)
     val game = new Game(noCards, players)
@@ -47,10 +60,5 @@ class GameTest extends ProjectTest {
 
   "gameOver" must "be false if cards are still in the game" in {
     assertResult(false)(game.gameOver)
-  }
-  
-  "makeBoard" must "create a new Board" in {
-    val result = game.makeBoard
-    assert(result.isInstanceOf[Board])
   }
 }

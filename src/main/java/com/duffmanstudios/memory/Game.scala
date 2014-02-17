@@ -9,10 +9,17 @@ package com.duffmanstudios.memory
 class Game(cards: Array[Card], players: Array[Player]) {
 
   val board = makeBoard
+  var currentPlayer = players(0)
 
   def isMatch(cardOne: Card, cardTwo: Card) = cardOne.Id == cardTwo.Id
 
   def gameOver = cards.isEmpty
 
   def makeBoard = new Board(cards)
+
+  def switchPlayer {
+    val currentPlayerIndex = currentPlayer.number - 1
+    val newPlayerIndex = (currentPlayerIndex + 1) % 2
+    currentPlayer = players(newPlayerIndex)
+  }
 }

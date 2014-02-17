@@ -5,7 +5,7 @@ package com.duffmanstudios.memory
  *
  * @author Iain Duff
  */
-class Player(number: Int) {
+class Player(val number: Int) {
 
   var score = 0
 

@@ -10,9 +10,9 @@ Game
 ====
 
 Take turn logic
-    - select Cards              DONE
-    - check card entry          DONE
-    - check for match
-    - add scores, remove card if necessary
-    - switch player
+    - select Cards                                  DONE
+    - check card entry                              DONE
+    - check for match                               DONE
+    - add scores, remove card if necessary          DONE
+    - switch player                                 DONE
 Delete isMatch
