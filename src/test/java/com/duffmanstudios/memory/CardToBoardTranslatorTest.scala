@@ -7,7 +7,8 @@ package com.duffmanstudios.memory
  */
 class CardToBoardTranslatorTest extends ProjectTest {
 
-  val totalNumberOfCards = game.board.getNumCards
+  val f = fixture
+  val totalNumberOfCards = f.game.board.getNumCards
 
   "translateCardNumberIntoBoardGridLocation" must "return the cell in the first column of the first row for the very first card" in {
     val numberOfFirstCard = 1

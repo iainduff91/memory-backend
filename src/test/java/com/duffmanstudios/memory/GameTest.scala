@@ -25,40 +25,46 @@ class GameTest extends ProjectTest {
   }
 
   "makeBoard" must "create a new Board" in {
-    val result = game.makeBoard
+    val f = fixture
+    val result = f.game.makeBoard
     assert(result.isInstanceOf[Board])
   }
 
   "isMatch" must "return true if both compared cards have matching IDs" in {
     val cardOne = new Card(1)
     val cardTwo = new Card(1)
+    val f = fixture
 
-    assert(game.isMatch(cardOne, cardTwo))
+    assert(f.game.isMatch(cardOne, cardTwo))
   }
 
   "isMatch" must "return false if compared cards do NOT have matching IDs" in {
     val cardOne = new Card(1)
     val cardTwo = new Card(2)
+    val f = fixture
 
-    assert(!game.isMatch(cardOne, cardTwo))
+    assert(!f.game.isMatch(cardOne, cardTwo))
   }
 
   "switchPlayer" must "change the current player to the previous current player's opponent" in {
-    game.currentPlayer.number should equal (1)
-    game.switchPlayer
-    game.currentPlayer.number should equal (2)
-    game.switchPlayer
-    game.currentPlayer.number should equal (1)
+    val f = fixture
+    f.game.currentPlayer.number should equal (1)
+    f.game.switchPlayer
+    f.game.currentPlayer.number should equal (2)
+    f.game.switchPlayer
+    f.game.currentPlayer.number should equal (1)
   }
 
   "gameOver" must "be true if no cards are left in the game" in {
     val noCards = new Array[Card](0)
-    val game = new Game(noCards, players)
+    val f = fixture
+    val game = new Game(noCards, f.players)
 
     assert(game.gameOver)
   }
 
   "gameOver" must "be false if cards are still in the game" in {
-    assertResult(false)(game.gameOver)
+    val f = fixture
+    assertResult(false)(f.game.gameOver)
   }
 }

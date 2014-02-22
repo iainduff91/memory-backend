@@ -10,30 +10,34 @@ import org.scalatest.{Matchers, FlatSpec}
 class BoardTest extends ProjectTest {
 
   "duplicateCards" must "create a list containing 2 of each given card" in {
-    val expectedNumberOfCards = 2 * cardsList.length
-    val result = game.board.duplicateCards(cardsList)
+    val f = fixture
+    val expectedNumberOfCards = 2 * f.cardsList.length
+    val result = f.game.board.duplicateCards(f.cardsList)
     assertResult(expectedNumberOfCards)(result.size)
-    assertResult(cardsList(0).Id)(result(0).Id)
-    assertResult(cardsList(0).Id)(result(1).Id)
-    assertResult(cardsList(1).Id)(result(2).Id)
-    assertResult(cardsList(1).Id)(result(3).Id)
+    assertResult(f.cardsList(0).Id)(result(0).Id)
+    assertResult(f.cardsList(0).Id)(result(1).Id)
+    assertResult(f.cardsList(1).Id)(result(2).Id)
+    assertResult(f.cardsList(1).Id)(result(3).Id)
   }
 
   "layCards" must "create a grid with 4 columns" in {
-    val cardGrid = game.board.boardGrid
+    val f = fixture
+    val cardGrid = f.game.board.boardGrid
     assertResult(4)(cardGrid.length)
   }
 
   "layCards" must "create a grid with 2 of each card" in {
-    val expectedNumberOfCards = 2 * cardsList.length
-    val cardGrid = game.board.boardGrid
+    val f = fixture
+    val expectedNumberOfCards = 2 * f.cardsList.length
+    val cardGrid = f.game.board.boardGrid
 
     val actualNumberOfCards = cardGrid(0).length + cardGrid(1).length + cardGrid(2).length + cardGrid(3).length
     assertResult(expectedNumberOfCards)(actualNumberOfCards)
   }
 
   "layCards" must "create a grid with cards in a random order" in {
-    val laidBoard = game.board.boardGrid
+    val f = fixture
+    val laidBoard = f.game.board.boardGrid
     val concatenatedResult = "" +
       laidBoard(0)(0).get.Id + laidBoard(1)(0).get.Id + laidBoard(2)(0).get.Id + laidBoard(3)(0).get.Id +
       laidBoard(0)(1).get.Id + laidBoard(1)(1).get.Id + laidBoard(2)(1).get.Id + laidBoard(3)(1).get.Id +
@@ -100,10 +104,12 @@ class BoardTest extends ProjectTest {
   }
 
   "isEmpty" must "return false if there are still cards on the board" in {
-    game.board.isEmpty should be (false)
+    val f = fixture
+    f.game.board.isEmpty should be (false)
   }
 
   "getNumCards" must "return the correct number of cards" in {
-    game.board.getNumCards should equal (10)
+    val f = fixture
+    f.game.board.getNumCards should equal (10)
   }
 }
