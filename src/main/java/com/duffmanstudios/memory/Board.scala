@@ -13,7 +13,7 @@ class Board(cards: Array[Card]) {
   val boardGrid = layCards(cards)
 
   def layCards(cards: Array[Card]): Array[MutableList[Option[Card]]] = {
-    var cardPairs = duplicateCards(cards)
+    val cardPairs = duplicateCards(cards)
     val cardGrid:Array[MutableList[Option[Card]]] = Array(MutableList(), MutableList(), MutableList(), MutableList())
 
     val random = new Random()
@@ -55,11 +55,11 @@ class Board(cards: Array[Card]) {
   }
 
   def isEmpty = {
-    var empty = false
+    var empty = true
     for (column <- boardGrid) {
       for (cell <- column) {
-        if (cell.isEmpty) {
-          empty = true
+        if (!cell.isEmpty) {
+          empty = false
         }
       }
     }

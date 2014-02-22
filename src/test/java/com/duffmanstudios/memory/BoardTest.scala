@@ -105,6 +105,9 @@ class BoardTest extends ProjectTest {
 
   "isEmpty" must "return false if there are still cards on the board" in {
     val f = fixture
+    val firstCardLocation = (0, 0)
+    val secondCardLocation = (1, 0)
+    f.game.board.removeCards(firstCardLocation, secondCardLocation)
     f.game.board.isEmpty should be (false)
   }
 
