@@ -6,6 +6,25 @@ package com.duffmanstudios.memory
  * @author Iain Duff
  */
 class GameTest extends ProjectTest {
+  
+  "2-parameter Game constructor" should "create a new Game with the given players and cards" in {
+    val cards = createCardArray(4)
+    val players = Array(new Player(1), new Player(2), new Player(3))
+
+    val game = new Game(cards, players)
+
+    game.cards.length should be (cards.length)
+    game.players.length should be (players.length)
+  }
+
+  "1-parameter Game constructor" should "create a new Game with the given cards and 2 players" in {
+    val cards = createCardArray(5)
+
+    val game = new Game(cards)
+
+    game.cards.length should be (cards.length)
+    game.players.length should be (2)
+  }
 
   "makeBoard" must "create a new Board" in {
     val f = defaultGameFixture
@@ -44,11 +63,11 @@ class GameTest extends ProjectTest {
   "processMove" should "increase a player's score if a match is found" in {
     val sf = fixture(1)
 
-    sf.players(0).score should be (0)
+    sf.game.players(0).score should be (0)
 
     sf.game.processMove(1, 2)
 
-    sf.players(0).score should be (1)
+    sf.game.players(0).score should be (1)
   }
 
   "processMove" should "remove the card pair if they match" in {
@@ -89,7 +108,7 @@ class GameTest extends ProjectTest {
 
     f.game.processMove(firstCardSelected, secondCardSelected)
 
-    f.players(0).score should be (0)
+    f.game.players(0).score should be (0)
   }
 
   "processMove" should "correctly identify the winner if the game is over" in {
@@ -98,14 +117,14 @@ class GameTest extends ProjectTest {
     //select the only 2 cards in the game
     sf.game.processMove(1, 2)
 
-    sf.game.winner should equal (sf.players(0))
+    sf.game.winner should equal (sf.game.players(0))
   }
 
   "processMove" should "not identify a winner if the game is not over" in {
     val f = defaultGameFixture
 
     //ensures that player 1 will always have a higher score than player 2 in this test
-    f.players(0).increaseScore
+    f.game.players(0).increaseScore
     f.game.processMove(1, 2)
 
     f.game.winner should be (None)
@@ -116,7 +135,7 @@ class GameTest extends ProjectTest {
 
     f.game.processMove(1, 2)
 
-    f.game.currentPlayer should be (f.players(1))
+    f.game.currentPlayer should be (f.game.players(1))
   }
 
   "processMove" should "not switch player if the game IS over" in {
@@ -124,7 +143,7 @@ class GameTest extends ProjectTest {
 
     sf.game.processMove(1, 2)
 
-    sf.game.currentPlayer should be (sf.players(0))
+    sf.game.currentPlayer should be (sf.game.players(0))
   }
 
   "switchPlayer" must "change the current player to the previous current player's opponent" in {
@@ -152,9 +171,9 @@ class GameTest extends ProjectTest {
 
   "findWinner" must "return the player who has the highest score" in {
     val f = defaultGameFixture
-    f.players(0).increaseScore
+    f.game.players(0).increaseScore
 
-    f.game.findWinner should be (f.players(0))
+    f.game.findWinner should be (f.game.players(0))
   }
 
   "findWinner" must "return None if the match results in a draw" in {

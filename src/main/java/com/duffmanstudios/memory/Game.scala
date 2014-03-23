@@ -6,11 +6,14 @@ package com.duffmanstudios.memory
  *
  * @author Iain Duff
  */
-class Game(cards: Array[Card], players: Array[Player]) {
+class Game(val cards: Array[Card], val players: Array[Player]) {
 
   val board = makeBoard
   var currentPlayer = players(0)
   var winner: Object = None
+
+
+  def this(cards: Array[Card]) = this(cards, Array(new Player(1), new Player(2)))
 
   def makeBoard = new Board(cards)
 

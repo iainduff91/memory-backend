@@ -15,12 +15,11 @@ class ProjectTest extends FlatSpec with Matchers {
   def defaultGameFixture = fixture(5)
 
   def fixture(numCards: Int) = new {
-    val cardsList = populateCardsList(numCards)
-    val players = Array(new Player(1), new Player(2))
-    val game = new Game(cardsList, players)
+    val cardsList = createCardArray(numCards)
+    val game = new Game(cardsList)
   }
 
-  def populateCardsList(numCards: Int) = {
+  def createCardArray(numCards: Int) = {
     val cards = new Array[Card](numCards)
     for (i <- 0 until numCards) {
       cards(i) = new Card(i)
