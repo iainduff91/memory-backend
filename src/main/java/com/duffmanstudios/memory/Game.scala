@@ -12,22 +12,6 @@ class Game(cards: Array[Card], players: Array[Player]) {
   var currentPlayer = players(0)
   var winner: Object = None
 
-  def isMatch(cardOne: Card, cardTwo: Card) = cardOne.Id == cardTwo.Id
-
-  def gameOver = board.isEmpty
-
-  def findWinner = {
-    val playerList = players.toList
-    val highestScore = playerList.map(_.score).max
-    if (noClearWinner(playerList, highestScore)) {
-      None
-    } else {
-      playerList.maxBy(_.score)
-    }
-  }
-
-  def noClearWinner(players: List[Player], highestScore: Int) = players.toList.count(_.score == highestScore) > 1
-
   def makeBoard = new Board(cards)
 
   def processMove(firstCardSelected: Int, secondCardSelected: Int) {
@@ -46,6 +30,22 @@ class Game(cards: Array[Card], players: Array[Player]) {
       switchPlayer()
     }
   }
+
+  def isMatch(cardOne: Card, cardTwo: Card) = cardOne.Id == cardTwo.Id
+
+  def gameOver = board.isEmpty
+
+  def findWinner = {
+    val playerList = players.toList
+    val highestScore = playerList.map(_.score).max
+    if (noClearWinner(playerList, highestScore)) {
+      None
+    } else {
+      playerList.maxBy(_.score)
+    }
+  }
+
+  protected def noClearWinner(players: List[Player], highestScore: Int) = players.toList.count(_.score == highestScore) > 1
 
   def switchPlayer() {
     val currentPlayerIndex = currentPlayer.number - 1
