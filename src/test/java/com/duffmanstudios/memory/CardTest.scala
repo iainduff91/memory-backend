@@ -17,9 +17,6 @@ class CardTest extends ProjectTest {
   }
 
   "Two cards with non-matching IDs" must "be identified as having non-matching IDs" in {
-    val cardOne = new Card(1)
-    val cardTwo = new Card(2)
-
     cardOne.Id should not equal cardTwo.Id
   }
 
@@ -45,9 +42,6 @@ class CardTest extends ProjectTest {
   }
 
   "equals" must "return false if cards have DIFFERENT IDs" in {
-    val cardOne = new Card(1)
-    val cardTwo = new Card(2)
-
     assertResult(false)(cardOne.equals(cardTwo))
   }
 }

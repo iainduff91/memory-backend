@@ -9,6 +9,8 @@ import org.scalatest.{FlatSpec, Matchers}
  */
 class ProjectTest extends FlatSpec with Matchers {
 
+  val cardOne = new Card(1)
+  val cardTwo = new Card(2)
 
   def defaultGameFixture = fixture(5)
 

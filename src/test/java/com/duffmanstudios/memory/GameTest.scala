@@ -22,8 +22,6 @@ class GameTest extends ProjectTest {
   }
 
   "isMatch" must "return false if compared cards do NOT have matching IDs" in {
-    val cardOne = new Card(1)
-    val cardTwo = new Card(2)
     val f = defaultGameFixture
 
     assert(!f.game.isMatch(cardOne, cardTwo))
