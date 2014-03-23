@@ -1,5 +1,7 @@
 package com.duffmanstudios.memory
 
+import com.duffmanstudios.memory.util.GameBuilderUtil
+
 /**
  * Contains unit tests for the functionality in Board
  *
@@ -8,7 +10,7 @@ package com.duffmanstudios.memory
 class GameTest extends ProjectTest {
   
   "2-parameter Game constructor" should "create a new Game with the given players and cards" in {
-    val cards = createCardArray(4)
+    val cards = GameBuilderUtil.createGameCardArray(4)
     val players = Array(new Player(1), new Player(2), new Player(3))
 
     val game = new Game(cards, players)
@@ -18,7 +20,7 @@ class GameTest extends ProjectTest {
   }
 
   "1-parameter Game constructor" should "create a new Game with the given cards and 2 players" in {
-    val cards = createCardArray(5)
+    val cards = GameBuilderUtil.createGameCardArray(5)
 
     val game = new Game(cards)
 

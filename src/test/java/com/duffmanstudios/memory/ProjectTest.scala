@@ -1,6 +1,7 @@
 package com.duffmanstudios.memory
 
 import org.scalatest.{FlatSpec, Matchers}
+import com.duffmanstudios.memory.util.GameBuilderUtil
 
 /**
  * Contains variables and functionality shared across all unit tests in the application.
@@ -15,15 +16,7 @@ class ProjectTest extends FlatSpec with Matchers {
   def defaultGameFixture = fixture(5)
 
   def fixture(numCards: Int) = new {
-    val cardsList = createCardArray(numCards)
+    val cardsList = GameBuilderUtil.createGameCardArray(numCards)
     val game = new Game(cardsList)
-  }
-
-  def createCardArray(numCards: Int) = {
-    val cards = new Array[Card](numCards)
-    for (i <- 0 until numCards) {
-      cards(i) = new Card(i)
-    }
-    cards
   }
 }
