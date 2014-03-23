@@ -7,25 +7,29 @@ package com.duffmanstudios.memory
  */
 class PlayerTest extends ProjectTest {
 
+  def playerFixture = new {
+    val player = new Player(1)
+  }
+
   "selectCards" must "return the cards selected by the player" in {
-    val player = new Player (1)
+    val fixture = playerFixture
     val selectedCardOne = 1
     val selectedCardTwo = 4
 
-    val selectedCards = player.selectCards(selectedCardOne, selectedCardTwo)
+    val selectedCards = fixture.player.selectCards(selectedCardOne, selectedCardTwo)
 
     selectedCards(0) should equal (1)
     selectedCards(1) should equal (4)
   }
 
   "A player's score" must "start at zero" in {
-    val player = new Player(1)
-    player.score should be (0)
+    val fixture = playerFixture
+    fixture.player.score should be (0)
   }
 
   "incrementScore" must "add one to a player's score" in {
-    val player = new Player(1)
-    player.increaseScore
-    player.score should be (1)
+    val fixture = playerFixture
+    fixture.player.increaseScore
+    fixture.player.score should be (1)
   }
 }

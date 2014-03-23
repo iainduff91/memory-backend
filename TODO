@@ -4,7 +4,7 @@ Board
 Player
 ======
 
-Add to score if get a matching pair
+Add to score if get a matching pair                 DONE
 
 Game
 ====
@@ -15,4 +15,14 @@ Take turn logic
     - check for match                               DONE
     - add scores, remove card if necessary          DONE
     - switch player                                 DONE
-Delete isMatch
+Delete isMatch                                      IGNORE - MAKES THE CODE MORE READABLE
+
+processMove
+    - should take the selected cards                DONE
+    - check for a match                             DONE
+    - remove from the board if so                   DONE
+    - add any scores if necessary                   DONE
+    - check game over                               DONE
+    - if so, whose the winner?                      DONE
+
+checkWin                                            DONE
