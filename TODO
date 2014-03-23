@@ -24,5 +24,6 @@ processMove
     - add any scores if necessary                   DONE
     - check game over                               DONE
     - if so, whose the winner?                      DONE
+    - switch current player                         DONE
 
 checkWin                                            DONE

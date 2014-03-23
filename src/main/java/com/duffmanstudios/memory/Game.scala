@@ -42,6 +42,8 @@ class Game(cards: Array[Card], players: Array[Player]) {
 
     if (gameOver) {
       winner = findWinner
+    } else {
+      switchPlayer()
     }
   }
 

@@ -140,6 +140,23 @@ class GameTest extends ProjectTest {
     f.game.winner should be (None)
   }
 
+  "processMove" should "switch the current player at the end of the move if the game is NOT over" in {
+    val f = fixture
+
+    f.game.processMove(1, 2)
+
+    f.game.currentPlayer should be (f.players(1))
+  }
+
+  "processMove" should "not switch player if the game IS over" in {
+    val singleCardList = Array(new Card(1))
+    val players = Array(new Player(1), new Player(2))
+    val game = new Game(singleCardList, players)
+
+    game.processMove(1, 2)
+
+    game.currentPlayer should be (players(0))
+  }
 
   "switchPlayer" must "change the current player to the previous current player's opponent" in {
     val f = fixture
