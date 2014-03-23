@@ -9,9 +9,20 @@ import org.scalatest.{FlatSpec, Matchers}
  */
 class ProjectTest extends FlatSpec with Matchers {
 
-  def fixture = new {
-    val cardsList = Array(new Card(1), new Card(1), new Card(2), new Card(2), new Card(3))
+
+  def defaultGameFixture = fixture(5)
+
+  def fixture(numCards: Int) = new {
+    val cardsList = populateCardsList(numCards)
     val players = Array(new Player(1), new Player(2))
     val game = new Game(cardsList, players)
+  }
+
+  def populateCardsList(numCards: Int) = {
+    val cards = new Array[Card](numCards)
+    for (i <- 0 until numCards) {
+      cards(i) = new Card(i)
+    }
+    cards
   }
 }

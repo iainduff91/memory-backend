@@ -1,7 +1,5 @@
 package com.duffmanstudios.memory
 
-import scala.collection.mutable.Stack
-
 /**
  * Contains unit tests for the functionality in Board
  *
@@ -9,23 +7,8 @@ import scala.collection.mutable.Stack
  */
 class GameTest extends ProjectTest {
 
-  "A Stack" should "remove items in last-in first-out order" in {
-    val stack = new Stack[Int]
-    stack.push(1)
-    stack.push(2)
-    stack.pop() should be (2)
-    stack.pop() should be (1)
-  }
-
-  it should "throw NoSuchElementException if an empty stack is popped" in {
-    val emptyStack = new Stack[Int]
-    a [NoSuchElementException] should be thrownBy {
-      emptyStack.pop();
-    }
-  }
-
   "makeBoard" must "create a new Board" in {
-    val f = fixture
+    val f = defaultGameFixture
     val result = f.game.makeBoard
     assert(result.isInstanceOf[Board])
   }
@@ -33,7 +16,7 @@ class GameTest extends ProjectTest {
   "isMatch" must "return true if both compared cards have matching IDs" in {
     val cardOne = new Card(1)
     val cardTwo = new Card(1)
-    val f = fixture
+    val f = defaultGameFixture
 
     assert(f.game.isMatch(cardOne, cardTwo))
   }
@@ -41,13 +24,13 @@ class GameTest extends ProjectTest {
   "isMatch" must "return false if compared cards do NOT have matching IDs" in {
     val cardOne = new Card(1)
     val cardTwo = new Card(2)
-    val f = fixture
+    val f = defaultGameFixture
 
     assert(!f.game.isMatch(cardOne, cardTwo))
   }
 
   "processMove" should "check the validity of players' moves" in {
-    val f = fixture
+    val f = defaultGameFixture
     val valid = 1
     val invalid = -1
 
@@ -61,25 +44,21 @@ class GameTest extends ProjectTest {
   }
 
   "processMove" should "increase a player's score if a match is found" in {
-    val cards = Array(new Card(1))
-    val players = Array(new Player(1), new Player(2))
-    val game = new Game(cards, players)
+    val sf = fixture(1)
 
-    players(0).score should be (0)
+    sf.players(0).score should be (0)
 
-    game.processMove(1, 2)
+    sf.game.processMove(1, 2)
 
-    players(0).score should be (1)
+    sf.players(0).score should be (1)
   }
 
   "processMove" should "remove the card pair if they match" in {
-    val cards = Array(new Card(1))
-    val players = Array(new Player(1), new Player(2))
-    val game = new Game(cards, players)
+    val sf = fixture(1)
 
-    game.processMove(1, 2)
+    sf.game.processMove(1, 2)
 
-    game.board.isEmpty should be (true)
+    sf.game.board.isEmpty should be (true)
   }
 
   "processMove" should "NOT remove the card pair if they don't match" in {
@@ -120,18 +99,16 @@ class GameTest extends ProjectTest {
   }
 
   "processMove" should "correctly identify the winner if the game is over" in {
-    val singleCardList = Array(new Card(1))
-    val players = Array(new Player(1), new Player(2))
-    val game = new Game(singleCardList, players)
+    val sf = fixture(1)
 
     //select the only 2 cards in the game
-    game.processMove(1, 2)
+    sf.game.processMove(1, 2)
 
-    game.winner should equal (players(0))
+    sf.game.winner should equal (sf.players(0))
   }
 
   "processMove" should "not identify a winner if the game is not over" in {
-    val f = fixture
+    val f = defaultGameFixture
 
     //ensures that player 1 will always have a higher score than player 2 in this test
     f.players(0).increaseScore
@@ -141,7 +118,7 @@ class GameTest extends ProjectTest {
   }
 
   "processMove" should "switch the current player at the end of the move if the game is NOT over" in {
-    val f = fixture
+    val f = defaultGameFixture
 
     f.game.processMove(1, 2)
 
@@ -149,17 +126,15 @@ class GameTest extends ProjectTest {
   }
 
   "processMove" should "not switch player if the game IS over" in {
-    val singleCardList = Array(new Card(1))
-    val players = Array(new Player(1), new Player(2))
-    val game = new Game(singleCardList, players)
+    val sf = fixture(1)
 
-    game.processMove(1, 2)
+    sf.game.processMove(1, 2)
 
-    game.currentPlayer should be (players(0))
+    sf.game.currentPlayer should be (sf.players(0))
   }
 
   "switchPlayer" must "change the current player to the previous current player's opponent" in {
-    val f = fixture
+    val f = defaultGameFixture
     f.game.currentPlayer.number should equal (1)
     f.game.switchPlayer()
     f.game.currentPlayer.number should equal (2)
@@ -168,30 +143,28 @@ class GameTest extends ProjectTest {
   }
 
   "gameOver" must "be true if no cards are left in the game" in {
-    val singleCardList = Array(new Card(1))
-    val players = Array(new Player(1), new Player(2))
-    val game = new Game(singleCardList, players)
+    val sf = fixture(1)
 
     //remove the only 2 cards in the game, so the game is then over
-    game.processMove(1, 2)
+    sf.game.processMove(1, 2)
     
-    assert(game.gameOver)
+    assert(sf.game.gameOver)
   }
 
   "gameOver" must "be false if cards are still in the game" in {
-    val f = fixture
+    val f = defaultGameFixture
     assertResult(false)(f.game.gameOver)
   }
 
   "findWinner" must "return the player who has the highest score" in {
-    val f = fixture
+    val f = defaultGameFixture
     f.players(0).increaseScore
 
     f.game.findWinner should be (f.players(0))
   }
 
   "findWinner" must "return None if the match results in a draw" in {
-    val f = fixture
+    val f = defaultGameFixture
     f.game.findWinner should be (None)
   }
 

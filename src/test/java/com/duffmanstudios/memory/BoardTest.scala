@@ -10,7 +10,7 @@ import org.scalatest.{Matchers, FlatSpec}
 class BoardTest extends ProjectTest {
 
   "duplicateCards" must "create a list containing 2 of each given card" in {
-    val f = fixture
+    val f = defaultGameFixture
     val expectedNumberOfCards = 2 * f.cardsList.length
     val result = f.game.board.duplicateCards(f.cardsList)
     assertResult(expectedNumberOfCards)(result.size)
@@ -21,13 +21,13 @@ class BoardTest extends ProjectTest {
   }
 
   "layCards" must "create a grid with 4 columns" in {
-    val f = fixture
+    val f = defaultGameFixture
     val cardGrid = f.game.board.boardGrid
     assertResult(4)(cardGrid.length)
   }
 
   "layCards" must "create a grid with 2 of each card" in {
-    val f = fixture
+    val f = defaultGameFixture
     val expectedNumberOfCards = 2 * f.cardsList.length
     val cardGrid = f.game.board.boardGrid
 
@@ -36,7 +36,7 @@ class BoardTest extends ProjectTest {
   }
 
   "layCards" must "create a grid with cards in a random order" in {
-    val f = fixture
+    val f = defaultGameFixture
     val laidBoard = f.game.board.boardGrid
     val concatenatedResult = "" +
       laidBoard(0)(0).get.Id + laidBoard(1)(0).get.Id + laidBoard(2)(0).get.Id + laidBoard(3)(0).get.Id +
@@ -104,7 +104,7 @@ class BoardTest extends ProjectTest {
   }
 
   "isEmpty" must "return false if there are still cards on the board" in {
-    val f = fixture
+    val f = defaultGameFixture
     val firstCardLocation = (0, 0)
     val secondCardLocation = (1, 0)
     f.game.board.removeCards(firstCardLocation, secondCardLocation)
@@ -112,7 +112,7 @@ class BoardTest extends ProjectTest {
   }
 
   "getNumCards" must "return the correct number of cards" in {
-    val f = fixture
+    val f = defaultGameFixture
     f.game.board.getNumCards should equal (10)
   }
 }
