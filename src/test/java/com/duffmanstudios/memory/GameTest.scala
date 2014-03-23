@@ -60,40 +60,36 @@ class GameTest extends ProjectTest {
   }
 
   "processMove" should "NOT remove the card pair if they don't match" in {
-    val cards = Array(new Card(1), new Card(2))
-    val players = Array(new Player(1), new Player(2))
-    val game = new Game(cards, players)
+    val f = fixture(2)
 
     val firstCard = 1
     //ensure first and second cards don't match
-    val secondCard = if (game.board.boardGrid(0)(0).get.Id != game.board.boardGrid(1)(0).get.Id) {
+    val secondCard = if (f.game.board.boardGrid(0)(0).get.Id != f.game.board.boardGrid(1)(0).get.Id) {
       2
     } else {
       3
     }
 
-    game.processMove(firstCard, secondCard)
+    f.game.processMove(firstCard, secondCard)
 
-    game.board.boardGrid(firstCard - 1)(0).isEmpty should be (false)
-    game.board.boardGrid(secondCard - 1)(0).isEmpty should be (false)
+    f.game.board.boardGrid(firstCard - 1)(0).isEmpty should be (false)
+    f.game.board.boardGrid(secondCard - 1)(0).isEmpty should be (false)
   }
 
   "processMove" should "NOT increase a player's score if a match isn't found" in {
-    val cards = Array(new Card(1), new Card(2), new Card(3))
-    val players = Array(new Player(1), new Player(2))
-    val game = new Game(cards, players)
+    val f = fixture(3)
 
     val firstCardSelected = 1
     //ensures that the first and second cards selected will NOT match
-    val secondCardSelected = if (game.board.boardGrid(0)(0).get.Id != game.board.boardGrid(1)(0).get.Id) {
+    val secondCardSelected = if (f.game.board.boardGrid(0)(0).get.Id != f.game.board.boardGrid(1)(0).get.Id) {
       2
     } else {
       3
     }
 
-    game.processMove(firstCardSelected, secondCardSelected)
+    f.game.processMove(firstCardSelected, secondCardSelected)
 
-    players(0).score should be (0)
+    f.players(0).score should be (0)
   }
 
   "processMove" should "correctly identify the winner if the game is over" in {
