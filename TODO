@@ -27,3 +27,17 @@ processMove
     - switch current player                         DONE
 
 checkWin                                            DONE
+
+Game creation validation
+    - Valid Number of players                                                                       DONE
+    - Valid number of cards                                                                         DONE
+
+Move validation
+    - selecting a space with a removed card                                                         DONE
+    - can't select same card 2x                                                                     DONE
+    - Selected card number boundaries                                                               DONE
+    - Throw error messages as soon as enter card, rather than waiting until both are entered        DONE
+
+Terminal - check win                                                                                DONE
+
+Cards store board (x,y) location

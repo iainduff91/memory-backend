@@ -20,9 +20,10 @@ object CardToBoardTranslator {
 
   private def checkNumberValid(cardNumber: Int, numCardsInGame: Int) = {
     if (cardNumber < 1) {
-      throw new IllegalArgumentException("The card number must be 1 or above")
+      throw new IllegalArgumentException("The card number must be 1 or above (value entered=" + cardNumber + ")")
     } else if (cardNumber > numCardsInGame) {
-      throw new IllegalArgumentException("The card number must be less than the total number of cards")
+      throw new IllegalArgumentException("The card number must be less than the total number of cards (value entered=" +
+        cardNumber + "; number of cards=" + numCardsInGame+ ")")
     }
   }
 }

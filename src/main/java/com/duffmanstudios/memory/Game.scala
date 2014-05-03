@@ -10,7 +10,7 @@ class Game(val cards: Array[Card], val players: Array[Player]) {
 
   val board = makeBoard
   var currentPlayer = players(0)
-  var winner: Object = None
+  var winner: Option[Player] = None
 
 
   def this(cards: Array[Card]) = this(cards, Array(new Player(1), new Player(2)))
@@ -38,13 +38,13 @@ class Game(val cards: Array[Card], val players: Array[Player]) {
 
   def gameOver = board.isEmpty
 
-  def findWinner = {
+  def findWinner: Option[Player] = {
     val playerList = players.toList
     val highestScore = playerList.map(_.score).max
     if (noClearWinner(playerList, highestScore)) {
       None
     } else {
-      playerList.maxBy(_.score)
+      Some(playerList.maxBy(_.score))
     }
   }
 

@@ -42,11 +42,18 @@ class Board(cards: Array[Card]) {
   }
 
   def getCardPair(cardOneXY: (Int, Int), cardTwoXY: (Int, Int)) = {
+    checkNotSameLocation(cardOneXY, cardTwoXY)
     val selectedCards: Array[Card] = new Array[Card](2)
     val errorMessage = "No card here!"
     selectedCards(0) = boardGrid(cardOneXY._1)(cardOneXY._2).getOrElse(throw new NoCardException(errorMessage))
     selectedCards(1) = boardGrid(cardTwoXY._1)(cardTwoXY._2).getOrElse(throw new NoCardException(errorMessage))
     selectedCards
+  }
+
+  def checkNotSameLocation(location1: (Int, Int), location2: (Int, Int)) {
+    if (location1.equals(location2)) {
+      throw new IllegalArgumentException("You selected the same card twice!")
+    }
   }
 
   def removeCards(cardOneXY: (Int, Int), cardTwoXY: (Int, Int)) {

@@ -10,7 +10,7 @@ import com.duffmanstudios.memory.util.GameBuilderUtil
 class GameTest extends ProjectTest {
   
   "2-parameter Game constructor" should "create a new Game with the given players and cards" in {
-    val cards = GameBuilderUtil.createGameCardArray(4)
+    val cards = GameBuilderUtil.generateGameCards(4)
     val players = Array(new Player(1), new Player(2), new Player(3))
 
     val game = new Game(cards, players)
@@ -20,7 +20,7 @@ class GameTest extends ProjectTest {
   }
 
   "1-parameter Game constructor" should "create a new Game with the given cards and 2 players" in {
-    val cards = GameBuilderUtil.createGameCardArray(5)
+    val cards = GameBuilderUtil.generateGameCards(5)
 
     val game = new Game(cards)
 
@@ -119,7 +119,7 @@ class GameTest extends ProjectTest {
     //select the only 2 cards in the game
     sf.game.processMove(1, 2)
 
-    sf.game.winner should equal (sf.game.players(0))
+    sf.game.winner.get should equal (sf.game.players(0))
   }
 
   "processMove" should "not identify a winner if the game is not over" in {
@@ -175,7 +175,7 @@ class GameTest extends ProjectTest {
     val f = defaultGameFixture
     f.game.players(0).increaseScore
 
-    f.game.findWinner should be (f.game.players(0))
+    f.game.findWinner.get should be (f.game.players(0))
   }
 
   "findWinner" must "return None if the match results in a draw" in {

@@ -16,7 +16,7 @@ class ProjectTest extends FlatSpec with Matchers {
   def defaultGameFixture = fixture(5)
 
   def fixture(numCards: Int) = new {
-    val cardsList = GameBuilderUtil.createGameCardArray(numCards)
+    val cardsList = GameBuilderUtil.generateGameCards(numCards)
     val game = new Game(cardsList)
   }
 }

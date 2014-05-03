@@ -80,6 +80,27 @@ class BoardTest extends ProjectTest {
     }
   }
 
+  "getCardPair" should "throw an exception if both card locations refer to the same location" in {
+    val f = fixture(12)
+    intercept[IllegalArgumentException] {
+      f.game.board.getCardPair((0, 0), (0, 0))
+    }
+  }
+
+  "checkNotSameLocation" should "throw an IllegalArgumentException if the given card locations both refer to the same location" in {
+    val f = fixture(12)
+    intercept[IllegalArgumentException] {
+      f.game.board.checkNotSameLocation((0, 0), (0, 0))
+    }
+  }
+
+  "checkNotSameLocation" should "not throw an IllegalArgumentException if the given card locations are not the same" in {
+    val f = fixture(12)
+    f.game.board.checkNotSameLocation((0, 0), (1, 0))
+    f.game.board.checkNotSameLocation((0, 0), (0, 1))
+    f.game.board.checkNotSameLocation((1, 1), (0, 0))
+  }
+
   "removeCards" must "remove a card from a location on the board" in {
     val gameCards = Array(new Card(1), new Card(2), new Card(3))
     val board = new Board(gameCards)

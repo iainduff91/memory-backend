@@ -5,4 +5,4 @@ package com.duffmanstudios.memory
  *
  * @author Iain Duff
  */
-class NoCardException(message: String) extends Exception
+class NoCardException(message: String) extends Exception(message: String)
